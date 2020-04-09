@@ -1,10 +1,12 @@
 package io;
 
+import java.io.IOException;
+
 /**
  * 基类-输入
  * 功能: 读取数据
  * * 1.从哪读数据?
- * * 2.读取到的数据放哪?
+ * * 2.读取到的数据放哪--放到内存中，由调用方处理
  * InputStream关心的是怎么读，而以上两个问题需要基于磁盘或者网络的工作机制来进一步讨论
  *
  * @author hui.zhong
@@ -13,11 +15,14 @@ package io;
 public abstract class InputStream {
 
 	/**
+	 * 抽象方法，自行实现
+	 *
 	 * @return 返回所读取数据的下一个字节，如果到末尾了，则返回-1。这个方法会阻塞直到有输入的数据、已经到流的末尾或者有异常
-	 * 1. 怎么判定为末尾?
+	 * @throws IOException 该异常由调用方处理
+	 * 1. 怎么判定为末尾? native方法
 	 * 2. 如何阻塞?
 	 */
-	public abstract int read();
+	public abstract int read() throws IOException;
 
 	/**
 	 * 从输入字节流读取数组长度的数据到byte数组中
@@ -25,7 +30,7 @@ public abstract class InputStream {
 	 * @param b
 	 * @return
 	 */
-	public int read(byte b[]) {
+	public int read(byte b[]) throws IOException {
 		return read(b, 0, b.length);
 	}
 
@@ -37,7 +42,7 @@ public abstract class InputStream {
 	 * @param len 指定所读取的数据的最大长度
 	 * @return
 	 */
-	public int read(byte b[], int off, int len) {
+	public int read(byte b[], int off, int len) throws IOException {
 		// 校验读取的参数
 		if (b == null) {
 			throw new NullPointerException();
