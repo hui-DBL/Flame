@@ -32,8 +32,16 @@ public class BufferedInputStream extends FilterInputStream {
         buf = new byte[size];
     }
 
+    /**
+     * & 0xff 保持补码的一致性
+     *
+     * @return
+     * @throws IOException
+     */
     @Override
     public int read() throws IOException {
 
     }
+
+
 }
