@@ -40,7 +40,7 @@ public class BufferedInputStream extends FilterInputStream {
 	 */
 	@Override
 	public int read() throws IOException {
-
+		return 0;
 	}
 
 
