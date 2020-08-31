@@ -12,7 +12,10 @@ import java.io.IOException;
  */
 public class FilterInputStream extends InputStream {
 
-	private InputStream in;
+	/**
+	 * in存在多线程竞争的可能，所以需要用volatile修饰来保证可见性和顺序性，以及在使用的入口用synchronized修饰保证原子性(线程安全)
+	 */
+	protected volatile InputStream in;
 
 	/**
 	 * 包和子类可见
